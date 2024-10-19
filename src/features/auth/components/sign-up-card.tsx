@@ -27,9 +27,10 @@ import {
 import { DottedSeparator } from "@/components/dotted-separator";
 
 import { registerSchema } from "../schemas";
+import { useRegister } from "../api/use-register";
 
 export const SignUpCard = () => {
-  const isPending = false;
+  const { isPending, mutate } = useRegister();
 
   const form = useForm<z.infer<typeof registerSchema>>({
     resolver: zodResolver(registerSchema),
@@ -41,7 +42,7 @@ export const SignUpCard = () => {
   });
 
   const onSubmit = (values: z.infer<typeof registerSchema>) => {
-    console.log(values);
+    mutate({ json: values });
   };
 
   return (
