@@ -11,8 +11,11 @@ export const useCreateWorkspace = () => {
   const queryClient = useQueryClient();
 
   const mutation = useMutation<ResponseType, Error, RequestType>({
-    mutationFn: async ({ json }) => {
-      const response = await client.api.workspaces["$post"]({ json });
+    mutationFn: async ({ form }) => {
+      console.log(form);
+
+      const response = await client.api.workspaces["$post"]({ form });
+      console.log(response);
 
       if (!response.ok) {
         throw new Error("Something went wrong");
@@ -24,7 +27,9 @@ export const useCreateWorkspace = () => {
       toast.success("Workspace created");
       queryClient.invalidateQueries({ queryKey: ["workspaces"] });
     },
-    onError: () => {
+    onError: (res) => {
+      console.log(res);
+
       toast.error("Failed to create workspace");
     },
   });
