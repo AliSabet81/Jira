@@ -28,6 +28,7 @@ import { Workspace } from "../types";
 import { updateWorkspaceSchema } from "../schemas";
 import { useUpdateWorkspace } from "../api/use-update-workspace";
 import { useDeleteWorkspace } from "../api/use-delete-workspace";
+import { useConfirm } from "@/hooks/use-confirm";
 
 interface EditWorkspaceFormProps {
   onCancel?: () => void;
@@ -43,6 +44,12 @@ export const EditWorkspaceForm = ({
 
   const { mutate: deleteWorkspace, isPending: isDeletingWorkspace } =
     useDeleteWorkspace();
+
+  const [DeleteDialog, confirmDelete] = useConfirm(
+    "Delete workspace",
+    "This action cannot be undone",
+    "destructive"
+  );
 
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -88,7 +95,6 @@ export const EditWorkspaceForm = ({
       },
       {
         onSuccess: () => {
-          // refresh & clear cache
           window.location.href = "/";
         },
       }
@@ -97,6 +103,8 @@ export const EditWorkspaceForm = ({
 
   return (
     <div className="flex flex-col gap-y-4">
+      <DeleteDialog />
+
       <Card className="size-full border-none shadow-none">
         <CardHeader className="flex flex-row items-center gap-x-4 p-7 space-y-0">
           <Button
