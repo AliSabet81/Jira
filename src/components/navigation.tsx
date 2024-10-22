@@ -11,11 +11,12 @@ import {
 } from "react-icons/go";
 
 import { cn } from "@/lib/utils";
+import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
 
 const router = [
   {
     label: "Home",
-    href: "/",
+    href: "",
     icon: GoHome,
     aciveIcon: GoHomeFill,
   },
@@ -40,16 +41,18 @@ const router = [
 ];
 
 export const Navigation = () => {
+  const workspaceId = useWorkspaceId();
   const pathname = usePathname();
 
   return (
     <ul className="flex flex-col">
       {router.map((item) => {
-        const isActive = pathname === item.href;
+        const fullHref = `/workspaces/${workspaceId}${item.href}`;
+        const isActive = pathname === fullHref;
         const Icon = isActive ? item.aciveIcon : item.icon;
 
         return (
-          <Link key={item.href} href={item.href}>
+          <Link key={item.href} href={fullHref}>
             <div
               className={cn(
                 "flex items-center gap-2.5 p-2.5 rounded-md font-medium hover:text-primary transition text-neutral-500",
