@@ -197,6 +197,10 @@ const app = new Hono()
       const { workspaceId } = c.req.param();
       const { code } = c.req.valid("json");
 
+      console.log("====================================");
+      console.log("route", workspaceId);
+      console.log("====================================");
+
       const databases = c.get("databases");
       const user = c.get("user");
 
@@ -221,7 +225,7 @@ const app = new Hono()
       }
 
       await databases.createDocument(DATABASE_ID, MEMBERS_ID, ID.unique(), {
-        workspace,
+        workspaceId,
         userId: user.$id,
         role: MemberRole.MEMBER,
       });

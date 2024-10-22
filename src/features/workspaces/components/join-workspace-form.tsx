@@ -33,6 +33,9 @@ export const JoinWorkspaceForm = ({
   const { mutate, isPending } = useJoinWorkspace();
 
   const onSubmit = () => {
+    console.log("====================================");
+    console.log("form", workspaceId);
+    console.log("====================================");
     mutate(
       {
         param: { workspaceId },
