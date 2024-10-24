@@ -6,7 +6,7 @@ import { ID, Query } from "node-appwrite";
 import { sessionMiddleware } from "@/lib/session-middleware";
 import { getMember } from "@/features/members/utils";
 
-import { createTaskSchema } from "../schema";
+import { createTaskSchema } from "../schemas";
 import { DATABASE_ID, MEMBERS_ID, PROJECTS_ID, TASKS_ID } from "@/config";
 import { TaskStatus } from "../types";
 import { createAdminClient } from "@/lib/appwrite";
