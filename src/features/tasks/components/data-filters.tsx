@@ -53,7 +53,7 @@ export const DataFilters = ({ hideProjectFilters }: DataFiltersProps) => {
   }
 
   return (
-    <div className="flex flex-col lg:flex-col gap-2">
+    <div className="flex flex-col lg:flex-row gap-2">
       <Select
         defaultValue={status ?? undefined}
         onValueChange={(value) => onStateChange(value)}

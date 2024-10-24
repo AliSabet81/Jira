@@ -42,7 +42,7 @@ const TaskViewSwitcher = () => {
               Table
             </TabsTrigger>
             <TabsTrigger className="h-8 w-full lg:w-auto " value="kanban">
-              Canban
+              Kanban
             </TabsTrigger>
             <TabsTrigger className="h-8 w-full lg:w-auto " value="calendar">
               Calendar
@@ -62,8 +62,8 @@ const TaskViewSwitcher = () => {
         ) : (
           <>
             <TabsContent value="table">{JSON.stringify(tasks)}</TabsContent>
-            <TabsContent value="canban">{JSON.stringify(tasks)}</TabsContent>
-            <TabsContent value="calendat">{JSON.stringify(tasks)}</TabsContent>
+            <TabsContent value="kanban">{JSON.stringify(tasks)}</TabsContent>
+            <TabsContent value="calendar">{JSON.stringify(tasks)}</TabsContent>
           </>
         )}
       </div>
