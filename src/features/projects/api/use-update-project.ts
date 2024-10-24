@@ -13,7 +13,7 @@ type RequestType = InferRequestType<
   (typeof client.api.projects)[":projectId"]["$patch"]
 >;
 
-export const useProjectProject = () => {
+export const useUpdateProject = () => {
   const router = useRouter();
   const queryClient = useQueryClient();
 

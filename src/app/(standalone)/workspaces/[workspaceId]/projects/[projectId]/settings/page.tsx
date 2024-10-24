@@ -4,6 +4,7 @@ import { getCurrent } from "@/features/auth/queries";
 import { EditWorkspaceForm } from "@/features/workspaces/components/edit-workspace-form";
 import { getWorkspace } from "@/features/workspaces/queries";
 import { getProject } from "@/features/projects/queries";
+import { EditProjectForm } from "@/features/projects/components/edit-project-form";
 
 interface ProjectIdSettingsPageProps {
   params: {
@@ -22,7 +23,11 @@ const ProjectIdSettingsPage = async ({
 
   const initialValues = await getProject({ projectId: params.projectId });
 
-  return <div className="w-full lg:max-w-xl"></div>;
+  return (
+    <div className="w-full lg:max-w-xl">
+      <EditProjectForm initialValues={initialValues} />
+    </div>
+  );
 };
 
 export default ProjectIdSettingsPage;
