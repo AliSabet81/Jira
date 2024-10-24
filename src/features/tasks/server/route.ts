@@ -24,14 +24,14 @@ const app = new Hono()
         assigneeId: z.string().nullish(),
         status: z.nativeEnum(TaskStatus).nullish(),
         search: z.string().nullish(),
-        dueData: z.string().nullish(),
+        dueDate: z.string().nullish(),
       })
     ),
     async (c) => {
       const { users } = await createAdminClient();
       const databases = c.get("databases");
       const user = c.get("user");
-      const { workspaceId, projectId, assigneeId, status, search, dueData } =
+      const { workspaceId, projectId, assigneeId, status, search, dueDate } =
         c.req.valid("query");
 
       const member = await getMember({
@@ -64,9 +64,9 @@ const app = new Hono()
         query.push(Query.equal("assigneeId", assigneeId));
       }
 
-      if (dueData) {
-        console.log("dueData: ", dueData);
-        query.push(Query.equal("dueData", dueData));
+      if (dueDate) {
+        console.log("dueDate: ", dueDate);
+        query.push(Query.equal("dueDate", dueDate));
       }
 
       if (search) {

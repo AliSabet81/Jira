@@ -9,14 +9,22 @@ import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
 import { useGetTasks } from "../api/use-get-tasks";
 import { useQueryState } from "nuqs";
 import { DataFilters } from "./data-filters";
+import { useTaskFilters } from "../hooks/use-task-filters";
 
 const TaskViewSwitcher = () => {
+  const [{ status, assigneeId, projectId, dueDate, search }] = useTaskFilters();
+
   const [view, setView] = useQueryState("task-view", { defaultValue: "table" });
 
   const workspaceId = useWorkspaceId();
 
   const { data: tasks, isLoading: isLoadingTasks } = useGetTasks({
     workspaceId,
+    status,
+    assigneeId,
+    projectId,
+    dueDate,
+    search,
   });
 
   const { open } = useCreateTaskModal();
@@ -53,9 +61,9 @@ const TaskViewSwitcher = () => {
           </div>
         ) : (
           <>
-            <TabsContent value="table">Data Table</TabsContent>
-            <TabsContent value="canban">Data Canban</TabsContent>
-            <TabsContent value="calendat">Data Calendar</TabsContent>
+            <TabsContent value="table">{JSON.stringify(tasks)}</TabsContent>
+            <TabsContent value="canban">{JSON.stringify(tasks)}</TabsContent>
+            <TabsContent value="calendat">{JSON.stringify(tasks)}</TabsContent>
           </>
         )}
       </div>

@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/select";
 import { ListChecks, ListChecksIcon } from "lucide-react";
 import { TaskStatus } from "../types";
+import { useTaskFilters } from "../hooks/use-task-filters";
 
 type DataFiltersProps = {
   hideProjectFilters?: boolean;
@@ -40,13 +41,23 @@ export const DataFilters = ({ hideProjectFilters }: DataFiltersProps) => {
     name: member.name,
   }));
 
+  const [{ status, assigneeId, projectId, dueDate, search }, setFilters] =
+    useTaskFilters();
+
+  const onStateChange = (value: string) => {
+    setFilters({ status: value === "all" ? null : (value as TaskStatus) });
+  };
+
   if (isLoading) {
     return <div></div>;
   }
 
   return (
     <div className="flex flex-col lg:flex-col gap-2">
-      <Select defaultValue={undefined} onValueChange={() => {}}>
+      <Select
+        defaultValue={status ?? undefined}
+        onValueChange={(value) => onStateChange(value)}
+      >
         <SelectTrigger className="w-full lg:w-auto h-8">
           <ListChecksIcon className="size-4 mr-2" />
           <SelectValue placeholder="All statuses" />
