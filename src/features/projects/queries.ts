@@ -1,4 +1,4 @@
-import { DATABASE_ID, MEMBERS_ID, WORKSPACES_ID } from "@/config";
+import { DATABASE_ID, PROJECTS_ID, WORKSPACES_ID } from "@/config";
 import { getMember } from "../members/utils";
 import { createSessionClient } from "@/lib/appwrite";
 import { Project } from "./types";
@@ -13,7 +13,7 @@ export const getProject = async ({ projectId }: GetProjectProps) => {
 
   const project = await databases.getDocument<Project>(
     DATABASE_ID,
-    WORKSPACES_ID,
+    PROJECTS_ID,
     projectId
   );
 
