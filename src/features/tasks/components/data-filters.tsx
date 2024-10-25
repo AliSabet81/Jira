@@ -20,7 +20,7 @@ type DataFiltersProps = {
   hideProjectFilters?: boolean;
 };
 
-export const DataFilters = ({ hideProjectFilters }: DataFiltersProps) => {
+export const DataFilters = ({}: DataFiltersProps) => {
   const workspaceId = useWorkspaceId();
 
   const { data: projects, isLoading: isLoadingProjects } = useGetProjects({
@@ -41,7 +41,7 @@ export const DataFilters = ({ hideProjectFilters }: DataFiltersProps) => {
     label: member.name,
   }));
 
-  const [{ status, assigneeId, projectId, dueDate, search }, setFilters] =
+  const [{ status, assigneeId, projectId, dueDate }, setFilters] =
     useTaskFilters();
 
   const onStateChange = (value: string) => {

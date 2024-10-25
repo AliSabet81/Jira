@@ -283,11 +283,11 @@ const app = new Hono()
       task.projectId
     );
 
-    const member = await getMember({
-      databases,
-      workspaceId: task.workspaceId,
-      userId: task.assigneeId,
-    });
+    const member = await databases.getDocument(
+      DATABASE_ID,
+      MEMBERS_ID,
+      task.assigneeId
+    );
 
     const user = await users.get(member.userId);
 

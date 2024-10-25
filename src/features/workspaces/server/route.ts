@@ -197,10 +197,6 @@ const app = new Hono()
       const { workspaceId } = c.req.param();
       const { code } = c.req.valid("json");
 
-      console.log("====================================");
-      console.log("route", workspaceId);
-      console.log("====================================");
-
       const databases = c.get("databases");
       const user = c.get("user");
 
