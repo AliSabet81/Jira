@@ -17,9 +17,6 @@ export const TaskDescription = ({ task }: TaskDescriptionProps) => {
   const { mutate, isPending } = useUpdateTask();
 
   const handleSave = () => {
-    console.log("====================================");
-    console.log("clicked");
-    console.log("====================================");
     mutate({ json: { description: value }, param: { taskId: task.$id } });
   };
 
