@@ -10,6 +10,8 @@ import { useGetTasks } from "../api/use-get-tasks";
 import { useQueryState } from "nuqs";
 import { DataFilters } from "./data-filters";
 import { useTaskFilters } from "../hooks/use-task-filters";
+import { DataTable } from "./data-table";
+import { columns } from "./columns";
 
 const TaskViewSwitcher = () => {
   const [{ status, assigneeId, projectId, dueDate, search }] = useTaskFilters();
@@ -61,7 +63,9 @@ const TaskViewSwitcher = () => {
           </div>
         ) : (
           <>
-            <TabsContent value="table">{JSON.stringify(tasks)}</TabsContent>
+            <TabsContent value="table">
+              <DataTable columns={columns} data={tasks?.documents ?? []} />
+            </TabsContent>
             <TabsContent value="kanban">{JSON.stringify(tasks)}</TabsContent>
             <TabsContent value="calendar">{JSON.stringify(tasks)}</TabsContent>
           </>
