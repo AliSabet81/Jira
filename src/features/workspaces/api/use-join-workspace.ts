@@ -17,9 +17,6 @@ export const useJoinWorkspace = () => {
 
   const mutation = useMutation<ResponseType, Error, RequestType>({
     mutationFn: async ({ param, json }) => {
-      console.log("====================================");
-      console.log("api", param);
-      console.log("====================================");
       const response = await client.api.workspaces[":workspaceId"]["join"][
         "$post"
       ]({

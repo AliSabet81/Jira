@@ -126,23 +126,10 @@ export const columns: ColumnDef<Task>[] = [
     },
   },
   {
-    accessorKey: "status",
     id: "actions",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Statuus
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
     cell: ({ row }) => {
       const id = row.original.$id;
       const projectId = row.original.projectId;
-
       return (
         <TaskActions id={id} projectId={projectId}>
           <Button variant="ghost" className="size-8 p-0">

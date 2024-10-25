@@ -6,7 +6,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { cn } from "@/lib/utils";
 import { DottedSeparator } from "@/components/dotted-separator";
-import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -21,7 +20,6 @@ import {
 } from "@/components/ui/form";
 
 import { createTaskSchema } from "../schemas";
-import { useCreateTask } from "../api/use-create-task";
 import { DatePicker } from "@/components/date-picker";
 import {
   Select,
@@ -31,33 +29,40 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { MemberAvatar } from "@/features/members/components/member-avatar";
-import { TaskStatus } from "../types";
+import { Task, TaskStatus } from "../types";
 import { ProjectAvatar } from "@/features/projects/components/project-avatar";
+import { useUpdateTask } from "../api/use-update-task";
 
-interface CreateTaskFormProps {
+interface EditTaskFormProps {
   onCancel?: () => void;
   projectOptions: { id: string; name: string; imageUrl: string }[];
   memberOptions: { id: string; name: string }[];
+  initialValues: Task;
 }
 
-export const CreateTaskForm = ({
+export const EditTaskForm = ({
   onCancel,
   projectOptions,
   memberOptions,
-}: CreateTaskFormProps) => {
-  const workspaceId = useWorkspaceId();
-  const { mutate, isPending } = useCreateTask();
+  initialValues,
+}: EditTaskFormProps) => {
+  const { mutate, isPending } = useUpdateTask();
 
   const form = useForm<z.infer<typeof createTaskSchema>>({
-    resolver: zodResolver(createTaskSchema.omit({ workspaceId: true })),
+    resolver: zodResolver(
+      createTaskSchema.omit({ workspaceId: true, description: true })
+    ),
     defaultValues: {
-      workspaceId: "",
+      ...initialValues,
+      dueDate: initialValues.dueDate
+        ? new Date(initialValues.dueDate)
+        : undefined,
     },
   });
 
   const onSubmit = (values: z.infer<typeof createTaskSchema>) => {
     mutate(
-      { json: { ...values, workspaceId } },
+      { json: values, param: { taskId: initialValues.$id } },
       {
         onSuccess: () => {
           form.reset();
@@ -70,7 +75,7 @@ export const CreateTaskForm = ({
   return (
     <Card className="size-full border-none shadow-none">
       <CardHeader className="flex p-7">
-        <CardTitle className="text-xl font-bold">Create new Task</CardTitle>
+        <CardTitle className="text-xl font-bold">Edit a Task</CardTitle>
       </CardHeader>
       <div className="px-7">
         <DottedSeparator />
@@ -226,7 +231,7 @@ export const CreateTaskForm = ({
                 Cancel
               </Button>
               <Button disabled={isPending} type="submit" size="lg">
-                Create Task
+                Save Changes
               </Button>
             </div>
           </form>
