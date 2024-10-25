@@ -20,7 +20,7 @@ type DataFiltersProps = {
   hideProjectFilters?: boolean;
 };
 
-export const DataFilters = ({}: DataFiltersProps) => {
+export const DataFilters = ({ hideProjectFilters }: DataFiltersProps) => {
   const workspaceId = useWorkspaceId();
 
   const { data: projects, isLoading: isLoadingProjects } = useGetProjects({
@@ -96,24 +96,26 @@ export const DataFilters = ({}: DataFiltersProps) => {
           ))}
         </SelectContent>
       </Select>
-      <Select
-        defaultValue={projectId ?? undefined}
-        onValueChange={(value) => onProjectChange(value)}
-      >
-        <SelectTrigger className="w-full lg:w-auto h-8">
-          <FolderIcon className="size-4 mr-2" />
-          <SelectValue placeholder="All projects" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectItem value="all">All projects</SelectItem>
-          <SelectSeparator />
-          {projectOptions?.map((project) => (
-            <SelectItem key={project.value} value={project.value}>
-              {project.label}
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
+      {!hideProjectFilters && (
+        <Select
+          defaultValue={projectId ?? undefined}
+          onValueChange={(value) => onProjectChange(value)}
+        >
+          <SelectTrigger className="w-full lg:w-auto h-8">
+            <FolderIcon className="size-4 mr-2" />
+            <SelectValue placeholder="All projects" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">All projects</SelectItem>
+            <SelectSeparator />
+            {projectOptions?.map((project) => (
+              <SelectItem key={project.value} value={project.value}>
+                {project.label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      )}
       <DatePicker
         placeholder="Due Date"
         className="h-8 w-full lg:w-auto"
