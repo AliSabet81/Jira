@@ -13,7 +13,7 @@ type RequestType = InferRequestType<
   (typeof client.api.tasks)[":taskId"]["$delete"]
 >;
 
-export const useCreateTask = () => {
+export const useDeleteTask = () => {
   const router = useRouter();
   const queryClient = useQueryClient();
 

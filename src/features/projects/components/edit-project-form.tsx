@@ -69,7 +69,7 @@ export const EditProjectForm = ({
     mutate(
       { form: finalValues, param: { projectId: initialValues.$id } },
       {
-        onSuccess: ({ data }) => {
+        onSuccess: () => {
           form.reset();
         },
       }
@@ -185,7 +185,7 @@ export const EditProjectForm = ({
                             hidden
                             type="file"
                             ref={inputRef}
-                            disabled={isPending}
+                            disabled={isPending || isDeletingProject}
                             onChange={handleImageChange}
                             accept=".jpg, .jpeg, .png, .svg, .webp"
                             autoComplete="off"
@@ -196,7 +196,7 @@ export const EditProjectForm = ({
                               type="button"
                               variant="destructive"
                               className="w-fit mt-2"
-                              disabled={isPending}
+                              disabled={isPending || isDeletingProject}
                               onClick={() => {
                                 field.onChange(null);
                                 if (inputRef.current)
@@ -211,7 +211,7 @@ export const EditProjectForm = ({
                               type="button"
                               variant="teritary"
                               className="w-fit mt-2"
-                              disabled={isPending}
+                              disabled={isPending || isDeletingProject}
                               onClick={() => inputRef.current?.click()}
                             >
                               Upload Image
@@ -230,12 +230,16 @@ export const EditProjectForm = ({
                   size="lg"
                   variant="secondary"
                   onClick={onCancel}
-                  disabled={isPending}
+                  disabled={isPending || isDeletingProject}
                   className={cn(!onCancel && "invisible")}
                 >
                   Cancel
                 </Button>
-                <Button disabled={isPending} type="submit" size="lg">
+                <Button
+                  disabled={isPending || isDeletingProject}
+                  type="submit"
+                  size="lg"
+                >
                   Save changes
                 </Button>
               </div>
@@ -257,7 +261,7 @@ export const EditProjectForm = ({
               type="button"
               size="sm"
               variant="destructive"
-              disabled={isPending}
+              disabled={isPending || isDeletingProject}
               onClick={handleDelete}
               className="w-fit ml-auto"
             >
