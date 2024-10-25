@@ -7,6 +7,7 @@ import {
 
 import { Task, TaskStatus } from "../types";
 import { useState } from "react";
+import { KanbanColumnHeader } from "./kanban-column-header";
 
 const boards: TaskStatus[] = [
   TaskStatus.BACKLOG,
@@ -56,7 +57,10 @@ export const DataKanban = ({ data }: DataKanbanProps) => {
               key={board}
               className="flex-1 mx-2 bg-muted p-1.5 rounded-md min-w-[200px]"
             >
-              {board}
+              <KanbanColumnHeader
+                board={board}
+                taskCount={tasks[board].length}
+              />
             </div>
           );
         })}
