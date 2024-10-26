@@ -1,5 +1,7 @@
 "use client";
 
+import * as React from "react";
+
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -21,7 +23,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import * as React from "react";
 import { Input } from "@/components/ui/input";
 
 interface DataTableProps<TData, TValue> {
