@@ -22,7 +22,7 @@ export const ProjectIdClient = () => {
   }
 
   if (!initialValues) {
-    return <PageError message="Task not found" />;
+    return <PageError message="Project not found" />;
   }
 
   return (
