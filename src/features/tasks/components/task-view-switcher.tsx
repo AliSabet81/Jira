@@ -22,7 +22,9 @@ type TaskViewSwitcherProps = {
   hideProjectFilters?: boolean;
 };
 
-const TaskViewSwitcher = ({ hideProjectFilters }: TaskViewSwitcherProps) => {
+export const TaskViewSwitcher = ({
+  hideProjectFilters,
+}: TaskViewSwitcherProps) => {
   const [{ status, assigneeId, projectId, dueDate, search }] = useTaskFilters();
 
   const [view, setView] = useQueryState("task-view", { defaultValue: "table" });
@@ -104,5 +106,3 @@ const TaskViewSwitcher = ({ hideProjectFilters }: TaskViewSwitcherProps) => {
     </Tabs>
   );
 };
-
-export default TaskViewSwitcher;
