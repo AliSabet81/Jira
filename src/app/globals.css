@@ -10,6 +10,23 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-button {
+    display: none;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #d2d2d8;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #aeaeb1;
+    border-radius: 50px;
+  }
 }
 
 @layer base {
@@ -75,4 +92,13 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
 }

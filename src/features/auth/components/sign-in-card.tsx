@@ -97,7 +97,7 @@ export const SignInCard = () => {
           size="lg"
           className="w-full"
         >
-          <FcGoogle />
+          <FcGoogle className="mr-2 size-5" />
           Sign in with Google
         </Button>
         <Button
@@ -106,7 +106,7 @@ export const SignInCard = () => {
           size="lg"
           className="w-full"
         >
-          <FaGithub />
+          <FaGithub className="mr-2 size-5" />
           Sign in with Github
         </Button>
       </CardContent>
