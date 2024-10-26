@@ -1,22 +1,27 @@
 "use client";
 
-import { DottedSeparator } from "@/components/dotted-separator";
-import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Loader, PlusIcon } from "lucide-react";
-import { useCreateTaskModal } from "../hooks/use-create-task-modal";
-import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
-import { useGetTasks } from "../api/use-get-tasks";
-import { useQueryState } from "nuqs";
-import { DataFilters } from "./data-filters";
-import { useTaskFilters } from "../hooks/use-task-filters";
-import { DataTable } from "./data-table";
-import { columns } from "./columns";
-import { DataKanban } from "./data-kanban";
 import { useCallback } from "react";
-import { TaskStatus } from "../types";
-import { useBulkUpdateTasks } from "../api/use-bulk-update-tasks";
+import { useQueryState } from "nuqs";
+import { Loader, PlusIcon } from "lucide-react";
+
+import { useProjectId } from "@/features/projects/hooks/use-project-id";
+import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
+
+import { Button } from "@/components/ui/button";
+import { DottedSeparator } from "@/components/dotted-separator";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+
+import { columns } from "./columns";
+import { DataTable } from "./data-table";
+import { DataKanban } from "./data-kanban";
+import { DataFilters } from "./data-filters";
 import { DataCalendar } from "./data-calendar";
+
+import { TaskStatus } from "../types";
+import { useGetTasks } from "../api/use-get-tasks";
+import { useTaskFilters } from "../hooks/use-task-filters";
+import { useBulkUpdateTasks } from "../api/use-bulk-update-tasks";
+import { useCreateTaskModal } from "../hooks/use-create-task-modal";
 
 type TaskViewSwitcherProps = {
   hideProjectFilters?: boolean;
@@ -30,13 +35,14 @@ export const TaskViewSwitcher = ({
   const [view, setView] = useQueryState("task-view", { defaultValue: "table" });
 
   const workspaceId = useWorkspaceId();
+  const paramProjectId = useProjectId();
   const { open } = useCreateTaskModal();
 
   const { data: tasks, isLoading: isLoadingTasks } = useGetTasks({
     workspaceId,
     status,
     assigneeId,
-    projectId,
+    projectId: paramProjectId || projectId,
     dueDate,
     search,
   });
