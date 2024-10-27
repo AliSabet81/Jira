@@ -7,6 +7,7 @@ import { FaGithub } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
+import { signUpWithGithub } from "@/lib/oauth";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -104,6 +105,7 @@ export const SignInCard = () => {
           disabled={isPending}
           variant="outline"
           size="lg"
+          onClick={() => signUpWithGithub()}
           className="w-full"
         >
           <FaGithub className="mr-2 size-5" />
