@@ -1,7 +1,9 @@
-import { AUTH_COOKIE } from "@/features/auth/constants";
-import { createAdminClient } from "@/lib/appwrite";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
+
+import { AUTH_COOKIE } from "@/features/auth/constants";
+
+import { createAdminClient } from "@/lib/appwrite";
 
 export async function GET(request: NextRequest) {
   const userId = request.nextUrl.searchParams.get("userId");

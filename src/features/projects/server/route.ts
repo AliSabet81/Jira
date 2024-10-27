@@ -5,11 +5,14 @@ import { zValidator } from "@hono/zod-validator";
 import { endOfMonth, startOfMonth, subMonths } from "date-fns";
 
 import { getMember } from "@/features/members/utils";
+import { TaskStatus } from "@/features/tasks/types";
+
 import { sessionMiddleware } from "@/lib/session-middleware";
+
 import { DATABASE_ID, IMAGES_BUCKET_ID, PROJECTS_ID, TASKS_ID } from "@/config";
+
 import { createProjectSchema, updateProjectSchema } from "../schemas";
 import { Project } from "../types";
-import { TaskStatus } from "@/features/tasks/types";
 
 const app = new Hono()
   .get(

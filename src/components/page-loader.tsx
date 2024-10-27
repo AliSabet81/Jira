@@ -1,5 +1,5 @@
-import { Loader } from "lucide-react";
 import React from "react";
+import { Loader } from "lucide-react";
 
 export const PageLoader = () => {
   return (

@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { signUpWithGithub, signUpWithGoogle } from "@/lib/oauth";
+
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
@@ -24,7 +25,6 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
-
 import { DottedSeparator } from "@/components/dotted-separator";
 
 import { registerSchema } from "../schemas";
