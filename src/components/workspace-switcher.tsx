@@ -20,7 +20,7 @@ export const WorkspaceSwitcher = () => {
   const workspaceId = useWorkspaceId();
   const router = useRouter();
   const { open } = useCreateWorkspaceModal();
-  const { data: wokspaces } = useGetWorkspaces();
+  const { data: workspaces } = useGetWorkspaces();
 
   const onSelect = (id: string) => {
     router.push(`/workspaces/${id}`);
@@ -40,7 +40,7 @@ export const WorkspaceSwitcher = () => {
           <SelectValue placeholder="No workspace selected" />
         </SelectTrigger>
         <SelectContent>
-          {wokspaces?.documents.map((workspace) => (
+          {workspaces?.documents?.map((workspace) => (
             <SelectItem value={workspace.$id} key={workspace.$id}>
               <div className="flex justify-start items-center gap-3 font-medium">
                 <WorkspaceAvatar
