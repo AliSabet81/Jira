@@ -1,16 +1,18 @@
 import { Hono } from "hono";
-import { zValidator } from "@hono/zod-validator";
 import { z } from "zod";
 import { ID, Query } from "node-appwrite";
+import { zValidator } from "@hono/zod-validator";
 
+import { createAdminClient } from "@/lib/appwrite";
 import { sessionMiddleware } from "@/lib/session-middleware";
+
+import { Project } from "@/features/projects/types";
 import { getMember } from "@/features/members/utils";
 
-import { createTaskSchema } from "../schemas";
 import { DATABASE_ID, MEMBERS_ID, PROJECTS_ID, TASKS_ID } from "@/config";
+
 import { Task, TaskStatus } from "../types";
-import { createAdminClient } from "@/lib/appwrite";
-import { Project } from "@/features/projects/types";
+import { createTaskSchema } from "../schemas";
 
 const app = new Hono()
   .get(

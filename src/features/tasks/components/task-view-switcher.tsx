@@ -11,17 +11,17 @@ import { Button } from "@/components/ui/button";
 import { DottedSeparator } from "@/components/dotted-separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-import { columns } from "./columns";
-import { DataTable } from "./data-table";
-import { DataKanban } from "./data-kanban";
-import { DataFilters } from "./data-filters";
-import { DataCalendar } from "./data-calendar";
-
 import { TaskStatus } from "../types";
 import { useGetTasks } from "../api/use-get-tasks";
 import { useTaskFilters } from "../hooks/use-task-filters";
 import { useBulkUpdateTasks } from "../api/use-bulk-update-tasks";
 import { useCreateTaskModal } from "../hooks/use-create-task-modal";
+
+import { columns } from "./columns";
+import { DataTable } from "./data-table";
+import { DataKanban } from "./data-kanban";
+import { DataFilters } from "./data-filters";
+import { DataCalendar } from "./data-calendar";
 
 type TaskViewSwitcherProps = {
   hideProjectFilters?: boolean;

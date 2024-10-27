@@ -5,11 +5,10 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { cn } from "@/lib/utils";
-import { DottedSeparator } from "@/components/dotted-separator";
 
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { MemberAvatar } from "@/features/members/components/member-avatar";
+import { ProjectAvatar } from "@/features/projects/components/project-avatar";
+
 import {
   Form,
   FormControl,
@@ -18,9 +17,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-
-import { createTaskSchema } from "../schemas";
-import { DatePicker } from "@/components/date-picker";
 import {
   Select,
   SelectContent,
@@ -28,9 +24,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { MemberAvatar } from "@/features/members/components/member-avatar";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { DatePicker } from "@/components/date-picker";
+import { DottedSeparator } from "@/components/dotted-separator";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+
+import { createTaskSchema } from "../schemas";
 import { Task, TaskStatus } from "../types";
-import { ProjectAvatar } from "@/features/projects/components/project-avatar";
 import { useUpdateTask } from "../api/use-update-task";
 
 interface EditTaskFormProps {
