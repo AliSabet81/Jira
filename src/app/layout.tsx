@@ -3,9 +3,10 @@ import { Inter } from "next/font/google";
 
 import { cn } from "@/lib/utils";
 
-import "./globals.css";
-import { QueryProvider } from "@/components/query-provider";
 import { Toaster } from "@/components/ui/sonner";
+import { QueryProvider } from "@/components/query-provider";
+
+import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 

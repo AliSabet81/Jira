@@ -1,16 +1,18 @@
 import { Hono } from "hono";
-import { zValidator } from "@hono/zod-validator";
 import { z } from "zod";
 import { ID, Query } from "node-appwrite";
+import { zValidator } from "@hono/zod-validator";
 
+import { createAdminClient } from "@/lib/appwrite";
 import { sessionMiddleware } from "@/lib/session-middleware";
+
+import { Project } from "@/features/projects/types";
 import { getMember } from "@/features/members/utils";
 
-import { createTaskSchema } from "../schemas";
 import { DATABASE_ID, MEMBERS_ID, PROJECTS_ID, TASKS_ID } from "@/config";
+
 import { Task, TaskStatus } from "../types";
-import { createAdminClient } from "@/lib/appwrite";
-import { Project } from "@/features/projects/types";
+import { createTaskSchema } from "../schemas";
 
 const app = new Hono()
   .get(
@@ -101,7 +103,7 @@ const app = new Hono()
 
           return {
             ...member,
-            name: user.name,
+            name: user.name || user.email,
             email: user.email,
           };
         })
@@ -293,7 +295,7 @@ const app = new Hono()
 
     const assignee = {
       ...member,
-      name: user.name,
+      name: user.name || user.email,
       email: user.email,
     };
 
@@ -338,7 +340,11 @@ const app = new Hono()
         return c.json({ error: "All tasks must belong to the same workspace" });
       }
 
-      const workspaceId = workspacesIds.values().next().value as string;
+      const workspaceId = workspacesIds.values().next().value;
+
+      if (!workspaceId) {
+        return c.json({ error: "Workspace ID is required" }, 400);
+      }
 
       const member = await getMember({
         databases,

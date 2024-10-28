@@ -3,8 +3,8 @@
 import { useRouter } from "next/navigation";
 import { RiAddCircleFill } from "react-icons/ri";
 
-import { useGetWorkspaces } from "@/features/workspaces/api/use-get-workspaces";
 import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
+import { useGetWorkspaces } from "@/features/workspaces/api/use-get-workspaces";
 import { WorkspaceAvatar } from "@/features/workspaces/components/workspace-avatar";
 import { useCreateWorkspaceModal } from "@/features/workspaces/hooks/use-create-workspace-modal";
 
@@ -20,7 +20,7 @@ export const WorkspaceSwitcher = () => {
   const workspaceId = useWorkspaceId();
   const router = useRouter();
   const { open } = useCreateWorkspaceModal();
-  const { data: wokspaces } = useGetWorkspaces();
+  const { data: workspaces } = useGetWorkspaces();
 
   const onSelect = (id: string) => {
     router.push(`/workspaces/${id}`);
@@ -40,7 +40,7 @@ export const WorkspaceSwitcher = () => {
           <SelectValue placeholder="No workspace selected" />
         </SelectTrigger>
         <SelectContent>
-          {wokspaces?.documents.map((workspace) => (
+          {workspaces?.documents?.map((workspace) => (
             <SelectItem value={workspace.$id} key={workspace.$id}>
               <div className="flex justify-start items-center gap-3 font-medium">
                 <WorkspaceAvatar

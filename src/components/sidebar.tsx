@@ -1,10 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
 
-import { DottedSeparator } from "./dotted-separator";
-import { Navigation } from "./navigation";
-import { WorkspaceSwitcher } from "./workspace-switcher";
 import { Projects } from "./projects";
+import { Navigation } from "./navigation";
+import { DottedSeparator } from "./dotted-separator";
+import { WorkspaceSwitcher } from "./workspace-switcher";
 
 export const Sidebar = () => {
   return (

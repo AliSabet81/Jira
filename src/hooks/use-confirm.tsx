@@ -1,6 +1,5 @@
 import { useState } from "react";
 
-import { ResponsiveModal } from "@/components/responsive-modal";
 import {
   Card,
   CardContent,
@@ -8,6 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { ResponsiveModal } from "@/components/responsive-modal";
 import { Button, type ButtonProps } from "@/components/ui/button";
 
 export const useConfirm = (

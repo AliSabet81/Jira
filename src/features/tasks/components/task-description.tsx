@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import { Task } from "../types";
-import { Button } from "@/components/ui/button";
 import { PencilIcon, XIcon } from "lucide-react";
-import { DottedSeparator } from "@/components/dotted-separator";
-import { useUpdateTask } from "../api/use-update-task";
+
+import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { DottedSeparator } from "@/components/dotted-separator";
+
+import { useUpdateTask } from "../api/use-update-task";
+import { Task } from "../types";
 
 interface TaskDescriptionProps {
   task: Task;
@@ -17,7 +19,14 @@ export const TaskDescription = ({ task }: TaskDescriptionProps) => {
   const { mutate, isPending } = useUpdateTask();
 
   const handleSave = () => {
-    mutate({ json: { description: value }, param: { taskId: task.$id } });
+    mutate(
+      { json: { description: value }, param: { taskId: task.$id } },
+      {
+        onSuccess: () => {
+          setIsEditing(false);
+        },
+      }
+    );
   };
 
   return (

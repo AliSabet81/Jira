@@ -1,18 +1,18 @@
 "use client";
 
 import { z } from "zod";
+import { toast } from "sonner";
 import { useRef } from "react";
 import Image from "next/image";
-import { ArrowLeft, CopyIcon, ImageIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { ArrowLeft, CopyIcon, ImageIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";
-import { DottedSeparator } from "@/components/dotted-separator";
-import { toast } from "sonner";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useConfirm } from "@/hooks/use-confirm";
+
 import {
   Form,
   FormControl,
@@ -24,7 +24,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { useConfirm } from "@/hooks/use-confirm";
+import { DottedSeparator } from "@/components/dotted-separator";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 import { Workspace } from "../types";
 import { updateWorkspaceSchema } from "../schemas";
@@ -77,14 +78,8 @@ export const EditWorkspaceForm = ({
       ...values,
       image: values.image instanceof File ? values.image : "",
     };
-    mutate(
-      { form: finalValues, param: { workspaceId: initialValues.$id } },
-      {
-        onSuccess: () => {
-          form.reset();
-        },
-      }
-    );
+
+    mutate({ form: finalValues, param: { workspaceId: initialValues.$id } });
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
