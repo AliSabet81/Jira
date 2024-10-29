@@ -5,10 +5,12 @@ import { ChevronRightIcon, TrashIcon } from "lucide-react";
 import { Project } from "@/features/projects/types";
 import { ProjectAvatar } from "@/features/projects/components/project-avatar";
 import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
+
 import { Button } from "@/components/ui/button";
 
-import { Task } from "../types";
 import { useConfirm } from "@/hooks/use-confirm";
+
+import { Task } from "../types";
 import { useDeleteTask } from "../api/use-delete-task";
 
 interface TaskBreadcrumbsProps {

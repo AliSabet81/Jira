@@ -1,8 +1,12 @@
+import { z } from "zod";
 import { Hono } from "hono";
 import { ID, Query } from "node-appwrite";
 import { zValidator } from "@hono/zod-validator";
+import { endOfMonth, startOfMonth, subMonths } from "date-fns";
 
+import { generateInviteCode } from "@/lib/utils";
 import { sessionMiddleware } from "@/lib/session-middleware";
+
 import {
   DATABASE_ID,
   IMAGES_BUCKET_ID,
@@ -11,23 +15,23 @@ import {
   WORKSPACES_ID,
 } from "@/config";
 
-import { createWorkspaceSchema, updateWorkspaceSchema } from "../schemas";
-import { MemberRole } from "@/features/members/types";
-import { generateInviteCode } from "@/lib/utils";
-import { getMember } from "@/features/members/utils";
-import { z } from "zod";
-import { Workspace } from "../types";
-import { endOfMonth, startOfMonth, subMonths } from "date-fns";
 import { TaskStatus } from "@/features/tasks/types";
+import { getMember } from "@/features/members/utils";
+import { Member, MemberRole } from "@/features/members/types";
+
+import { Workspace } from "../types";
+import { createWorkspaceSchema, updateWorkspaceSchema } from "../schemas";
 
 const app = new Hono()
   .get("/", sessionMiddleware, async (c) => {
     const user = c.get("user");
     const databases = c.get("databases");
 
-    const members = await databases.listDocuments(DATABASE_ID, MEMBERS_ID, [
-      Query.equal("userId", user.$id),
-    ]);
+    const members = await databases.listDocuments<Member>(
+      DATABASE_ID,
+      MEMBERS_ID,
+      [Query.equal("userId", user.$id)]
+    );
 
     if (members.total === 0) {
       return c.json({ data: { documents: [], total: 0 } });

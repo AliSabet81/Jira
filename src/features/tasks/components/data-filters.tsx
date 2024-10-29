@@ -1,4 +1,7 @@
 "use client";
+
+import { FolderIcon, ListChecksIcon, UserIcon } from "lucide-react";
+
 import { useGetMembers } from "@/features/members/api/use-get-members";
 import { useGetProjects } from "@/features/projects/api/use-get-projects";
 import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
@@ -11,10 +14,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { FolderIcon, ListChecksIcon, UserIcon } from "lucide-react";
+import { DatePicker } from "@/components/date-picker";
+
 import { TaskStatus } from "../types";
 import { useTaskFilters } from "../hooks/use-task-filters";
-import { DatePicker } from "@/components/date-picker";
 
 type DataFiltersProps = {
   hideProjectFilters?: boolean;
